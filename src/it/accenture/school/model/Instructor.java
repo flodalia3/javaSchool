@@ -1,8 +1,9 @@
 package it.accenture.school.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+//import java.util.ArrayList; //maybe change with list after some tests
 import java.util.Iterator;
+import java.util.List;
 
 public class Instructor {
 
@@ -11,9 +12,9 @@ public class Instructor {
     String surname;
     LocalDate birthDate;
     String email;
-    ArrayList<Area> areas;
+    List<Area> areas;
 
-    public Instructor(long id, String name, String surname, LocalDate birthDate, String email, ArrayList<Area> areas){
+    public Instructor(long id, String name, String surname, LocalDate birthDate, String email, List<Area> areas){
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -55,4 +56,10 @@ public class Instructor {
     public String getSurname(){
         return surname;
     }
+
+    public LocalDate getBirthDate() {return birthDate;}
+
+    public String getEmail() {return email;}
+
+    public List<Area> getAreas() {return areas;} //changed from arraylist to list, check later!
 }
