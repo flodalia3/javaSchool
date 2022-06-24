@@ -52,13 +52,13 @@ public class Console {
         while(courseArea == null){ //keeps cycling until it receives a valid value
             switch (areaTemp){
                 case "GRAPHICS":
-                    courseArea = courseArea.GRAPHICS;
+                    courseArea = Area.GRAPHICS;
                     break;
                 case "OFFICE":
-                    courseArea = courseArea.OFFICE;
+                    courseArea = Area.OFFICE;
                     break;
                 case "DEVELOPMENT":
-                    courseArea = courseArea.DEVELOPMENT;
+                    courseArea = Area.DEVELOPMENT;
                     break;
                 default:
                     System.out.println("Inserted wrong Area type!");
@@ -120,10 +120,27 @@ public class Console {
         LocalDate birthDate = LocalDate.parse(bd);
         System.out.println("Insert instructor's email: ");
         String email = s.nextLine();
-        System.out.println("Insert instructor's areas: ");
-        // ArrayList<Area> areas =  ??? for cycle?
-        //add to list the string converted to enum Area, min 1 max 3
-        //Instructor i = new Instructor(id, name, surname, birthDate, email, areas);
+        String areaTemp = "";
+        List<Area> areas = new ArrayList<>();
+        while(areaTemp != "-1") {
+            System.out.println("Insert instructor's areas (insert at least one area, -1 to end cycle): "); //exception min/max to be caught
+            areaTemp = s.nextLine();
+            if(areaTemp == "-1") {break;}
+            switch (areaTemp){
+                case "GRAPHICS":
+                    areas.add(Area.GRAPHICS);
+                    break;
+                case "OFFICE":
+                    areas.add(Area.OFFICE);
+                    break;
+                case "DEVELOPMENT":
+                    areas.add(Area.DEVELOPMENT);
+                    break;
+                default:
+                    System.out.println("Inserted wrong Area type!");
+            }
+        }
+        Instructor i = new Instructor(id, name, surname, birthDate, email, areas);
 
     }
 
