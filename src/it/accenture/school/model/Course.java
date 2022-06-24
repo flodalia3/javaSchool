@@ -18,11 +18,11 @@ public class Course {
 
     @Override
     public String toString(){  //change it so that it prints on just one line?
-        String s = "Id: "+this.id+"%n";
-        s = s+"Title: "+this.title+"%n";
-        s = s+"Hours: "+this.hours+"%n";
-        s = s+"Area: "+this.area.name()+"%n";
-        s = s+"Level: "+this.level.name()+"%n%n"; //is this enough separation?
+        String s = "Id: "+this.id+"\n";
+        s = s+"Title: "+this.title+"\n";
+        s = s+"Hours: "+this.hours+"\n";
+        s = s+"Area: "+this.area.name()+"\n";
+        s = s+"Level: "+this.level.name()+"\n"; //is this enough separation?
         return s;
     }
 

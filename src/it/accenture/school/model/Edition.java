@@ -22,14 +22,14 @@ public class Edition {
 
     @Override
     public String toString(){
-        String s = "Id: "+this.id+"%n";
-        s = s+"Course id: "+this.course.getId()+"%n";
-        s = s+"Course title: "+this.course.getTitle()+"%n";
-        s = s+"startDate: "+this.startDate.toString()+"%n";
-        s = s+"endDate: "+this.endDate.toString()+"%n";
-        s = s+"cost: "+this.cost+"%n";
-        s = s+"Instructor id: "+this.instructor.getId()+"%n";
-        s = s+"Instructor nominative: "+this.instructor.getName()+" "+this.instructor.getSurname()+"%n%n";
+        String s = "Id: "+this.id+"\n";
+        s = s+"Course id: "+this.course.getId()+"\n";
+        s = s+"Course title: "+this.course.getTitle()+"\n";
+        s = s+"startDate: "+this.startDate.toString()+"\n";
+        s = s+"endDate: "+this.endDate.toString()+"\n";
+        s = s+"cost: "+this.cost+"\n";
+        s = s+"Instructor id: "+this.instructor.getId()+"\n";
+        s = s+"Instructor nominative: "+this.instructor.getName()+" "+this.instructor.getSurname()+"\n \n";
         return s;
     }
 

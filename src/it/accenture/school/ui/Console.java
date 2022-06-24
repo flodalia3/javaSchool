@@ -16,6 +16,10 @@ public class Console {
         Scanner s = new Scanner(System.in);
 
         //testing all methods
+        SchoolRepository.SchoolDB.populateCourses();
+        SchoolRepository.SchoolDB.populateInstructors();
+        SchoolRepository.SchoolDB.populateEditions();
+
         c.printAllCourses();
         //c.printEditions(s);
         //c.printCoursesContainingString(s);
@@ -28,7 +32,7 @@ public class Console {
 
     public static void printAllCourses(){
         List<Course> courses = SchoolRepository.SchoolDB.getCourses();
-        System.out.println(courses.isEmpty()); //returns true
+        //System.out.println(courses.isEmpty()); //returns true
         //either courses in SchoolDB is empty or line 30 doesn't work
         for(Course c : courses){
             System.out.println(c.toString());
