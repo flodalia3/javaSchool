@@ -39,9 +39,9 @@ public class Instructor {
         String s = "Id: "+this.id+"%n";
         s = s+"Name: "+this.name+"%n";
         s = s+"Surname: "+this.surname+"%n";
-        s = s+"BirthDate: "+this.birthDate+"%n";
+        s = s+"Birth Date: "+this.birthDate+"%n";
         s = s+"Email: "+this.email+"%n";
-        s = s+"Areas: "+ strA;
+        s = s+"Areas: "+ strA+"%n%n";
         return s;
     }
 

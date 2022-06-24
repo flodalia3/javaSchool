@@ -4,6 +4,7 @@ import it.accenture.school.data.SchoolRepository;
 import it.accenture.school.model.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,9 +31,9 @@ public class Console {
             }
         }
     }
-    //String string
+
     public void printCoursesContainingString(Scanner s){ //stringa contenuta nel titolo
-        System.out.println("Insert string contained in the course's title: ");
+        System.out.println("Insert string contained in the course's title: "); //catch exception not contained?
         String portion = s.nextLine();
         List<Course> courses = SchoolRepository.SchoolDB.getCourses();
         for(Course c : courses){
@@ -42,70 +43,108 @@ public class Console {
         }
     }
 
-    public void printInstructors(Scanner s){
+    public void printInstructor(Scanner s){ //non può essere più di uno se associato a edition.id, o no?
         System.out.println("Insert edition id: ");
         long editionId = s.nextLong();
-        System.out.println("Insert edition area (ALL CAPS): ");
+        System.out.println("Insert course area (ALL CAPS): ");
         String areaTemp = s.nextLine();
-        Area editionArea = null;
-        while(editionArea == null){ //keeps cycling until it receives a valid value
+        Area courseArea = null;
+        while(courseArea == null){ //keeps cycling until it receives a valid value
             switch (areaTemp){
                 case "GRAPHICS":
-                    editionArea = Area.GRAPHICS;
+                    courseArea = courseArea.GRAPHICS;
                     break;
                 case "OFFICE":
-                    editionArea = Area.OFFICE;
+                    courseArea = courseArea.OFFICE;
                     break;
                 case "DEVELOPMENT":
-                    editionArea = Area.DEVELOPMENT;
+                    courseArea = courseArea.DEVELOPMENT;
                     break;
                 default:
                     System.out.println("Inserted wrong Area type!");
             }
         }
-        System.out.println("Insert edition level (ALL CAPS): ");
+        System.out.println("Insert course level (ALL CAPS): ");
         String levelTemp = s.nextLine();
-        Level editionLevel = null;
-        while(editionLevel == null){ //keeps cycling until it receives a valid value
+        Level courseLevel = null;
+        while(courseLevel == null){ //keeps cycling until it receives a valid value
             switch (levelTemp){
                 case "BASIC":
-                    editionLevel = Level.BASIC;
+                    courseLevel = Level.BASIC;
                     break;
                 case "ADVANCED":
-                    editionLevel = Level.ADVANCED;
+                    courseLevel = Level.ADVANCED;
                     break;
                 case "GURU":
-                    editionLevel = Level.GURU;
+                    courseLevel = Level.GURU;
                     break;
                 default:
                     System.out.println("Inserted wrong Level type!");
             }
         }
 
-        // DA SMONTARE
-        //ISTRUTTORE STA IN EDIZIONE, NON VICEVERSA
-        //TROVARE ISTRUTTORE A PARTIRE DA E.ID, E.COURSE.AREA, E.COURSE.LEVEL
+        List<Edition> editions = SchoolRepository.SchoolDB.getEditions();
 
-        List<Instructor> instructors = SchoolRepository.SchoolDB.getInstructors();
-        //getEditions? getCourses?
-        for(Instructor i : instructors){
-            /*if( ??? ){
-                System.out.println(i.toString());
+        for(Edition e : editions){
+            if(e.getId() == editionId) {
+                if(e.getCourse().getArea() == courseArea && e.getCourse().getLevel() == courseLevel) {
+                    System.out.println(e.getInstructor().toString());
+                };
+                break;
             }
-
-             */
         }
     }
-    //LocalDate data
-    public void printExpertInstructors(){
+
+    public void printExpertInstructors(Scanner s){
+        System.out.println("Insert instructor's birth date (format: YYYY-MM-DD): "); //catch exception wrong format
+        String birthday = s.nextLine();
+        LocalDate ld = LocalDate.parse(birthday);
+        List<Instructor> instructors = SchoolRepository.SchoolDB.getInstructors();
+        for(Instructor i : instructors){
+            if(i.getBirthDate().isAfter(ld) && i.getAreas().size() >= 2){
+                System.out.println(i.toString());
+            }
+        }
 
     }
-    //long instructorId, String name, String surname,
-    public void insertInstructor(){
+
+    public void insertInstructor(Scanner s){
+        System.out.println("Insert instructor's id: ");
+        long id = s.nextLong();
+        System.out.println("Insert instructor's name: ");
+        String name = s.nextLine();
+        System.out.println("Insert instructor's surname: ");
+        String surname = s.nextLine();
+        System.out.println("Insert instructor's birth date (format: YYYY-MM-DD): ");
+        String bd = s.nextLine();
+        LocalDate birthDate = LocalDate.parse(bd);
+        System.out.println("Insert instructor's email: ");
+        String email = s.nextLine();
+        System.out.println("Insert instructor's areas: ");
+        // ArrayList<Area> areas =  ??? for cycle?
+        //add to list the string converted to enum Area, min 1 max 3
+        //Instructor i = new Instructor(id, name, surname, birthDate, email, areas);
 
     }
 
-    public void assignInstructor(){
+    public void assignInstructor(Scanner s){
+        System.out.println("Insert instructor's id: ");
+        long instructorId = s.nextLong();
+        System.out.println("Insert edition id: ");
+        long editionId = s.nextLong();
+        Instructor instructor = null;
+        List<Edition> editions = SchoolRepository.SchoolDB.getEditions();
+        List<Instructor> instructors = SchoolRepository.SchoolDB.getInstructors();
+        for(Instructor i : instructors){
+            if(i.getId() == instructorId) {
+                instructor = i;
+            }
+        }
+        for(Edition e : editions){
+            if(e.getId() == editionId) {
+                e.setInstructor(instructor);
+            }
+        }
 
     }
 

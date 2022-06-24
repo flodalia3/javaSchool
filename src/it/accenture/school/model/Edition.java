@@ -36,4 +36,14 @@ public class Edition {
     public long getId(){
         return id;
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {this.instructor = instructor;}
 }
