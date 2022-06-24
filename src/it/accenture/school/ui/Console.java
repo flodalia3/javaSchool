@@ -115,7 +115,7 @@ public class Console {
         LocalDate ld = LocalDate.parse(birthday);
         List<Instructor> instructors = SchoolRepository.SchoolDB.getInstructors();
         for(Instructor i : instructors){
-            if(i.getBirthDate().isAfter(ld) && i.getAreas().size() >= 2){
+            if(ld.isAfter(i.getBirthDate()) && i.getAreas().size() >= 2){ //instructor was born before given LocalDate
                 System.out.println(i.toString());
             }
         }
