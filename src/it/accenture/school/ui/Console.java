@@ -23,12 +23,14 @@ public class Console {
         //c.printAllCourses();
         //c.printEditions(s);
         //c.printCoursesContainingString(s);
-        //c.printInstructor(s);
+        c.printInstructor(s);
         //c.printExpertInstructor(s);
         //c.insertInstructor(s);
         //c.assignInstructor(s);
-        c.printEditions(s);
+        //c.printEditions(s);
 
+        //when main ends, there is no persistence and all data gets flushed by garbage collection
+        //this is why DBs are fundamental!
     }
 
     public static void printAllCourses(){
@@ -60,11 +62,7 @@ public class Console {
         }
     }
 
-    public void printInstructor(Scanner s){ //problem with scanner: it goes from line 64 directly to the switch and loops on default
-        System.out.println("Insert edition id: ");
-        //s.nextLine();
-        long editionId = s.nextLong();
-        s.nextLine();
+    public void printInstructor(Scanner s){
         System.out.println("Insert course area (ALL CAPS): ");
         String areaTemp = s.nextLine();
         Area courseArea = null;
@@ -105,16 +103,13 @@ public class Console {
         List<Edition> editions = SchoolRepository.SchoolDB.getEditions();
 
         for(Edition e : editions){
-            if(e.getId() == editionId) {
                 if(e.getCourse().getArea() == courseArea && e.getCourse().getLevel() == courseLevel) {
                     System.out.println(e.getInstructor().toString());
-                }
-                break;
             }
         }
     }
 
-    public void printExpertInstructor(Scanner s){
+    public void printExpertInstructor(Scanner s){ //change it so that Instructor is the one that checks BirthDate after/before
         System.out.println("Insert instructor's birth date (format: YYYY-MM-DD): "); //catch exception wrong format
         String birthday = s.nextLine();
         LocalDate ld = LocalDate.parse(birthday);
@@ -167,7 +162,7 @@ public class Console {
 
     }
 
-    public void assignInstructor(Scanner s){ //there is no persistence, it doesn't change SchoolDB
+    public void assignInstructor(Scanner s){
         System.out.println("Insert instructor id: ");
         long instructorId = s.nextLong();
         s.nextLine();
