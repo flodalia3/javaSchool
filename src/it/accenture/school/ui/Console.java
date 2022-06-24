@@ -20,20 +20,19 @@ public class Console {
         SchoolRepository.SchoolDB.populateInstructors();
         SchoolRepository.SchoolDB.populateEditions();
 
-        c.printAllCourses();
+        //c.printAllCourses();
         //c.printEditions(s);
         //c.printCoursesContainingString(s);
         //c.printInstructor(s);
         //c.printExpertInstructor(s);
         //c.insertInstructor(s);
         //c.assignInstructor(s);
+        c.printEditions(s);
 
     }
 
     public static void printAllCourses(){
         List<Course> courses = SchoolRepository.SchoolDB.getCourses();
-        //System.out.println(courses.isEmpty()); //returns true
-        //either courses in SchoolDB is empty or line 30 doesn't work
         for(Course c : courses){
             System.out.println(c.toString());
         }
@@ -50,7 +49,7 @@ public class Console {
         }
     }
 
-    public void printCoursesContainingString(Scanner s){ //stringa contenuta nel titolo
+    public void printCoursesContainingString(Scanner s){ //string contained in the title
         System.out.println("Insert string contained in the course's title: "); //catch exception not contained?
         String portion = s.nextLine();
         List<Course> courses = SchoolRepository.SchoolDB.getCourses();
@@ -61,9 +60,11 @@ public class Console {
         }
     }
 
-    public void printInstructor(Scanner s){ //non può essere più di uno se associato a edition.id, o no?
+    public void printInstructor(Scanner s){ //problem with scanner: it goes from line 64 directly to the switch and loops on default
         System.out.println("Insert edition id: ");
+        //s.nextLine();
         long editionId = s.nextLong();
+        s.nextLine();
         System.out.println("Insert course area (ALL CAPS): ");
         String areaTemp = s.nextLine();
         Area courseArea = null;
@@ -107,7 +108,7 @@ public class Console {
             if(e.getId() == editionId) {
                 if(e.getCourse().getArea() == courseArea && e.getCourse().getLevel() == courseLevel) {
                     System.out.println(e.getInstructor().toString());
-                };
+                }
                 break;
             }
         }
@@ -123,12 +124,12 @@ public class Console {
                 System.out.println(i.toString());
             }
         }
-
     }
 
     public void insertInstructor(Scanner s){
         System.out.println("Insert instructor's id: ");
         long id = s.nextLong();
+        s.nextLine();
         System.out.println("Insert instructor's name: ");
         String name = s.nextLine();
         System.out.println("Insert instructor's surname: ");
@@ -140,10 +141,10 @@ public class Console {
         String email = s.nextLine();
         String areaTemp = "";
         List<Area> areas = new ArrayList<>();
-        while(areaTemp != "-1") {
+        boolean flag = true;
+        while(flag) {
             System.out.println("Insert instructor's areas (insert at least one area, -1 to end cycle): "); //exception min/max to be caught
             areaTemp = s.nextLine();
-            if(areaTemp == "-1") {break;}
             switch (areaTemp){
                 case "GRAPHICS":
                     areas.add(Area.GRAPHICS);
@@ -154,19 +155,25 @@ public class Console {
                 case "DEVELOPMENT":
                     areas.add(Area.DEVELOPMENT);
                     break;
+                case "-1":
+                    flag = false;
+                    break;
                 default:
                     System.out.println("Inserted wrong Area type!");
             }
         }
         Instructor i = new Instructor(id, name, surname, birthDate, email, areas);
+        SchoolRepository.SchoolDB.addInstructor(i);
 
     }
 
-    public void assignInstructor(Scanner s){
-        System.out.println("Insert instructor's id: ");
+    public void assignInstructor(Scanner s){ //there is no persistence, it doesn't change SchoolDB
+        System.out.println("Insert instructor id: ");
         long instructorId = s.nextLong();
+        s.nextLine();
         System.out.println("Insert edition id: ");
         long editionId = s.nextLong();
+        s.nextLine();
         Instructor instructor = null;
         List<Edition> editions = SchoolRepository.SchoolDB.getEditions();
         List<Instructor> instructors = SchoolRepository.SchoolDB.getInstructors();

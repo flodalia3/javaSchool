@@ -27,6 +27,10 @@ public class SchoolRepository {
             return instructors;
         }
 
+        public static void addInstructor(Instructor i) {
+            instructors.add(i);
+        }
+
 
         public static List<Course> populateCourses() {
             courses.add(new Course(01,"JavaMeister", 200, Area.DEVELOPMENT, Level.GURU));
@@ -45,7 +49,7 @@ public class SchoolRepository {
             aGallo.add(Area.GRAPHICS);
 
             //populate instructors
-            instructors.add(new Instructor(01, "Fabio", "Romano", LocalDate.of(1967,5,14), "fromano@fakemail.com", fRomano));
+            instructors.add(new Instructor(01, "Fabio", "Romano", LocalDate.of(1967,05,14), "fromano@fakemail.com", fRomano));
             instructors.add(new Instructor(02, "Andrea", "Gallo", LocalDate.of(1978,11,23), "agallo@fakemail.com", aGallo));
 
             return instructors;

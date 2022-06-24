@@ -23,13 +23,13 @@ public class Edition {
     @Override
     public String toString(){
         String s = "Id: "+this.id+"\n";
-        s = s+"Course id: "+this.course.getId()+"\n";
-        s = s+"Course title: "+this.course.getTitle()+"\n";
-        s = s+"startDate: "+this.startDate.toString()+"\n";
-        s = s+"endDate: "+this.endDate.toString()+"\n";
-        s = s+"cost: "+this.cost+"\n";
-        s = s+"Instructor id: "+this.instructor.getId()+"\n";
-        s = s+"Instructor nominative: "+this.instructor.getName()+" "+this.instructor.getSurname()+"\n \n";
+        s = s+"Course Id: "+this.course.getId()+"\n";
+        s = s+"Course Title: "+this.course.getTitle()+"\n";
+        s = s+"Start Date: "+this.startDate.toString()+"\n";
+        s = s+"End Date: "+this.endDate.toString()+"\n";
+        s = s+"Cost: "+this.cost+"\n";
+        s = s+"Instructor's Id: "+this.instructor.getId()+"\n";
+        s = s+"Instructor's Name: "+this.instructor.getName()+" "+this.instructor.getSurname()+"\n \n";
         return s;
     }
 
