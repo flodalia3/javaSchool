@@ -12,10 +12,24 @@ public class Console {
 
     public static void main(String[] args) {
         //test methods in here
+        Console c = new Console();
+        Scanner s = new Scanner(System.in);
+
+        //testing all methods
+        c.printAllCourses();
+        //c.printEditions(s);
+        //c.printCoursesContainingString(s);
+        //c.printInstructor(s);
+        //c.printExpertInstructor(s);
+        //c.insertInstructor(s);
+        //c.assignInstructor(s);
+
     }
 
-    public void printAllCourses(){
+    public static void printAllCourses(){
         List<Course> courses = SchoolRepository.SchoolDB.getCourses();
+        System.out.println(courses.isEmpty()); //returns true
+        //either courses in SchoolDB is empty or line 30 doesn't work
         for(Course c : courses){
             System.out.println(c.toString());
         }
@@ -95,7 +109,7 @@ public class Console {
         }
     }
 
-    public void printExpertInstructors(Scanner s){
+    public void printExpertInstructor(Scanner s){
         System.out.println("Insert instructor's birth date (format: YYYY-MM-DD): "); //catch exception wrong format
         String birthday = s.nextLine();
         LocalDate ld = LocalDate.parse(birthday);
@@ -162,8 +176,5 @@ public class Console {
                 e.setInstructor(instructor);
             }
         }
-
     }
-
-
 }
